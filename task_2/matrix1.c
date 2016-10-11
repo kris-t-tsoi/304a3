@@ -18,6 +18,7 @@ double getTime(){
 }
 
 
+
 //matrix 1
 int main (int argc, char *argv[])
 {
@@ -26,7 +27,9 @@ int main (int argc, char *argv[])
   /* variables*/
   unsigned int M = 1000;
   unsigned int N = 1000;
-  unsigned int i,j;
+  unsigned int i,j,k;
+
+  double value,sum;
 
   /* declare variables; examples, adjust for task */
 	double  a[1000][1000];
@@ -41,10 +44,22 @@ int main (int argc, char *argv[])
 		}
 	}
 
-
   t1 = getTime();
   /* code to be measured goes here */
   /***************************************/
+
+  //product of matrix a and b
+  for(i=0;i<N;i++){
+	  for(j=0;j<N;j++){
+		  sum = 0.0;
+		  for(k=0;k<N;k++){
+			  value = a[i][k] * b[k][j];
+			  sum = sum + value;
+
+		  }
+		  c[i][j] = sum;
+	  }
+  }
 
 
 
@@ -55,8 +70,8 @@ int main (int argc, char *argv[])
   /* output; examples, adjust for task */
   printf("time: %6.2f secs\n",(t2 - t1));
 
-  /* free memory; examples, adjust for task */
-  //free(a);
+
 
   return 0;
+
 }

@@ -17,66 +17,67 @@ double getTime(){
   return sec;
 }
 
-/* for task 1 only */
-void usage(void)
-{
-	fprintf(stderr, "Usage: cachetest1/2 [--repetitions M] [--array_size N]\n");
-	exit(1);
-}
 
 int main (int argc, char *argv[])
 {
-  double t1, t2;
-
-  /* variables for task 1 */
-  unsigned int M = 1000;
-  unsigned int N = 256*1024;
-  unsigned int i;
-
-  /* declare variables; examples, adjust for task */
-	//int *a;
-	double  a[100];
+	  double t1, t2;
 
 
-  /* parameter parsing task 1 */
-  for(i=1; i<(unsigned)argc; i++) {
-	  if (strcmp(argv[i], "--repetitions") == 0) {
-		  i++;
-		  if (i < argc)
-			  sscanf(argv[i], "%u", &M);
-		  else
-			  usage();
-	  } else if (strcmp(argv[i], "--array_size") == 0) {
-		  i++;
-		  if (i < argc)
-			  sscanf(argv[i], "%u", &N);
-		  else
-			  usage();
-	  } else usage();
-  }
+	  /* variables*/
+	  unsigned int M = 1000;
+	  unsigned int N = 1000;
+	  unsigned int i,j,k;
 
 
-  /* allocate memory for arrays; examples, adjust for task */
-	 //a = malloc (N * sizeof(int));
-
-	 /* initialise arrray elements */
+	  double value,sum;
 
 
-  t1 = getTime();
-  /* code to be measured goes here */
-  /***************************************/
+	  /* declare variables; examples, adjust for task */
+		double  a[1000][1000];
+		double  b[1000][1000];
+		double  c[1000][1000];
+		double  temp[1000][1000];
+
+
+
+		 /* initialise array elements */
+			for(i=0;i<N;i++){
+				for(j=0;j<N;j++){
+					a[i][j] = 5.0;
+					b[i][j] = 4.3;
+				}
+			}
+
+
+
+	  t1 = getTime();
+	  /* code to be measured goes here */
+	  /***************************************/
 
 
 
 
-  /***************************************/
-	t2 = getTime();
 
-  /* output; examples, adjust for task */
-  printf("time: %6.2f secs\n",(t2 - t1));
 
-  /* free memory; examples, adjust for task */
-  //free(a);
+	  //product of matrix a and b
+	  for(i=0;i<N;i++){
+		  for(j=0;j<N;j++){
+			  sum = 0.0;
+			  for(k=0;k<N;k++){
+				  value = a[i][k] * b[k][j];
+				  sum = sum + value;
+
+			  }
+			  c[i][j] = sum;
+		  }
+	  }
+
+
+	  /***************************************/
+		t2 = getTime();
+
+	  /* output; examples, adjust for task */
+	  printf("time: %6.2f secs\n",(t2 - t1));
 
   return 0;
 }
